@@ -3,7 +3,7 @@ import numpy as np
 from joblib import load
 
 # 加载模型
-model = load('E:/RS/model/RF-3.pkl') # 请确保路径正确，且模型文件名为your_model.joblib
+model = load('RF-3.pkl') # 请确保路径正确，且模型文件名为your_model.joblib
 
 
 # 转换结果的标签
