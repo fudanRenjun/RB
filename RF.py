@@ -11,7 +11,7 @@ def convert_label(label):
     return 'normal' if label == 0 else 'RB'
 
 def main():
-    st.title('RF model screening for retinoblastoma (RB)')
+    st.title('RF model screening for retinoblastoma (RB) Version 1.0.0')
     st.write('Please enter the following indicators to screen:')
 
     # 创建输入框接收特征值
