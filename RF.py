@@ -1,10 +1,10 @@
 import streamlit as st
 import numpy as np
 from joblib import load
+import matplotlib.pyplot as plt
 
 # 加载模型
 model = load('RF-3.pkl') # 请确保路径正确，且模型文件名为your_model.joblib
-
 
 # 转换结果的标签
 def convert_label(label):
@@ -40,6 +40,25 @@ def main():
             # 显示预测概率
             st.write('The probability of screening as {}：{:.2f}%'.format('normal' if predicted_class == 0 else 'RB',
                                                        probabilities[predicted_class] * 100))
+            
+            # 创建柱状图展示概率分布
+            fig, ax = plt.subplots()
+            classes = ['normal', 'RB']
+            colors = ['green' if x == predicted_class else 'gray' for x in [0, 1]]
+            
+            bars = ax.bar(classes, probabilities, color=colors)
+            ax.set_ylabel('Probability')
+            ax.set_title('Prediction Probability Distribution')
+            ax.set_ylim(0, 1)
+            
+            # 在每个柱子上方显示概率值
+            for bar in bars:
+                height = bar.get_height()
+                ax.text(bar.get_x() + bar.get_width()/2., height,
+                        f'{height:.2%}',
+                        ha='center', va='bottom')
+            
+            st.pyplot(fig)
     else:
         st.write('Please fill in all feature values!')
 
